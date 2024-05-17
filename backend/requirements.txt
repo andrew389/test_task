@@ -1,0 +1,7 @@
+alembic
+asyncpg
+fastapi[all]
+python-dotenv
+sqlalchemy
+aiosqlite
+sqlalchemy-utils
