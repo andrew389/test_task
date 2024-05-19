@@ -1,0 +1,18 @@
+.listing {
+  padding: 20px;
+}
+
+mat-card {
+  width: 100%;
+}
+mat-card-header {
+  color: white;
+}
+
+.tags {
+  margin-top: 10px;
+}
+
+mat-chip {
+  margin: 5px;
+}

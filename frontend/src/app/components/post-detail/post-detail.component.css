@@ -1,0 +1,22 @@
+.listing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Забезпечте, щоб контейнер займав всю висоту екрану */
+}
+
+mat-card {
+  width: 400px; /* Змініть це значення на бажаний фіксований розмір */
+}
+
+mat-card-header {
+  color: white;
+}
+
+.tags {
+  margin-top: 10px;
+}
+
+mat-chip {
+  margin: 5px;
+}

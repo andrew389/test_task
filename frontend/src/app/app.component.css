@@ -1,0 +1,16 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  min-height: calc(100% - 50px); /* Висота екрану мінус висота футера */
+    background-color: aquamarine;
+}
+
+footer {
+  height: 50px; /* Висота футера */
+  background-color: slategrey; /* Колір футера */
+  color: white; /* Колір тексту у футері */
+  text-align: center; /* Вирівнювання тексту у центрі */
+}
