@@ -38,7 +38,7 @@ If after running this command, you were shown the docker version, then go to the
     docker-compose up -d
     ```
 
-    _Опція `-d` запускає контейнери у фоновому режимі._
+_The `-d` option runs containers in the background._
 
 4. After successful launch, you can access your project at `http://localhost:4200` in your web browser.
 
