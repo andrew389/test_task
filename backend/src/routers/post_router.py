@@ -1,45 +1,38 @@
+from fastapi import APIRouter, HTTPException, Query
 from typing import List
-
-from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import select, or_, func
 from uuid import UUID
-from sqlalchemy.ext.asyncio import AsyncSession
-from backend.src.database import get_async_session
-from backend.src.models.post import Post
 from backend.src.schemas.post import Post as PostSchema
+import json
+from functools import lru_cache
 
 router = APIRouter(prefix='/posts')
 
-
-@router.get("", response_model=list[PostSchema])
-async def get_all_posts(session: AsyncSession = Depends(get_async_session)):
-    async with session.begin():
-        result = await session.execute(select(Post))
-        posts = result.scalars().all()
-    return posts
+with open('db.json', 'r') as f:
+    posts_data = json.load(f)
 
 
-@router.get("/filter", response_model=list[PostSchema])
-async def filter_posts_by_tags(
-    tags: List[str] = Query(..., description="List of tags to filter by"),
-    session: AsyncSession = Depends(get_async_session)
-):
-    async with session.begin():
-        tags_str = ','.join(tags)
-        query = select(Post).filter(func.array_to_string(Post.tags, ',').ilike(f'%{tags_str}%'))
-        result = await session.execute(query)
-        posts = result.scalars().all()
-    return posts
+@lru_cache(maxsize=128)
+def get_all_posts_cached():
+    return posts_data
+
+
+@router.get("", response_model=List[PostSchema])
+async def get_all_posts():
+    return get_all_posts_cached()
+
+
+@router.get("/filter", response_model=List[PostSchema])
+async def filter_posts_by_tags(tags: List[str] = Query(...)):
+    filtered_posts = []
+    for post in get_all_posts_cached():
+        if all(tag in post['tags'] for tag in tags):
+            filtered_posts.append(post)
+    return filtered_posts
 
 
 @router.get("/{post_id}", response_model=PostSchema)
-async def get_post_by_id(
-        post_id: UUID,
-        session: AsyncSession = Depends(get_async_session)
-):
-    async with session.begin():
-        result = await session.execute(select(Post).filter(Post.id == post_id))
-        post = result.scalar()
-        if post is None:
-            raise HTTPException(status_code=404, detail="Post not found")
-    return post
+async def get_post_by_id(post_id: UUID):
+    for post in get_all_posts_cached():
+        if post['id'] == str(post_id):
+            return post
+    raise HTTPException(status_code=404, detail="Post not found")

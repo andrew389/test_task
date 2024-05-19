@@ -7,7 +7,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {HttpClientModule, HttpClient} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
+import {MarkdownModule} from "ngx-markdown";
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ import {HttpClientModule, HttpClient} from "@angular/common/http";
     MatChipsModule,
     MatButtonModule,
     MatGridListModule,
-    MatToolbarModule
+    MatToolbarModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

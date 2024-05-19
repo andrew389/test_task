@@ -1,54 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {map, Observable} from 'rxjs';
 import { Post } from "../interface/post";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-  posts: Post[] = [
-     {
-       id: '1',
-       title: 'title1',
-       summary: 'summary1',
-       tags: ['tag1', 'tag2'],
-       content: 'content',
-     },
-     {
-       id: '2',
-       title: 'title2',
-       summary: 'summary2',
-       tags: ['tag1', 'tag2'],
-       content: 'content',
-     },
-     {
-       id: '3',
-       title: 'title3',
-       summary: 'summary3',
-       tags: ['tag1', 'tag2'],
-       content: 'content',
-     },
-     {
-       id: '4',
-       title: 'title4',
-       summary: 'summary4',
-       tags: ['tag1', 'tag2'],
-       content: 'content',
-     },
-     {
-       id: '5',
-       title: 'title5',
-       summary: 'summary5',
-       tags: ['tag1', 'tag3'],
-       content: 'content',
-     },
-  ];
-  getAllPosts(): Post[]{
-    return this.posts;
+  private url = "http://127.0.0.1:8000/posts";
+
+  constructor(private http: HttpClient) { }
+
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.url);
   }
 
-  getPostById(id: string): Post | undefined {
-    return this.posts.find(post => post.id === id);
+  getPostById(id: string): Observable<Post | undefined> {
+    return this.http.get<Post[]>(this.url).pipe(
+      map(posts => posts.find(post => post.id === id))
+    );
   }
 }

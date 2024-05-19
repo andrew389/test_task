@@ -14,3 +14,24 @@
   background-color: white; /* Змініть фон за потребою */
 }
 
+.tags-and-button {
+  display: flex;
+  flex-direction: column; /* Розташування елементів у стовпці */
+  align-items: flex-start; /* Вирівнювання по лівому краю */
+  background-color: lightgrey; /* Колір фону контейнера */
+  padding: 10px; /* Подушка від країв контейнера */
+  border-radius: 5px; /* Закруглені кути */
+  max-width: max-content; /* Фіксована ширина, не більша за розмір контенту */
+  max-height: max-content; /* Фіксована висота, не більша за розмір контенту */
+  overflow: auto; /* Прокрутка, якщо контент виходить за межі */
+  margin: 0 auto; /* Центрування контейнера */
+  justify-content: center; /* Центрування контейнера по горизонталі */
+}
+
+.tags, .select {
+  width: 100%; /* Розтягнути контейнери на всю ширину */
+}
+
+.clear-button {
+  width: 100%; /* Розтягнути кнопку на всю ширину */
+}

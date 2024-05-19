@@ -1,16 +1,20 @@
-<section>
-  <mat-form-field>
-    <mat-label>Select Tag</mat-label>
-    <mat-select (selectionChange)="filterResults($event.value)">
-      <mat-option *ngFor="let tag of allTags" [value]="tag">{{ tag }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</section>
-
-<section>
-  <mat-checkbox *ngFor="let tag of allTags" (change)="toggleTag(tag)" class="checkbox-black">
-    {{ tag }}
-  </mat-checkbox>
+<section class="tags-and-button">
+  <div class="select">
+    <mat-form-field>
+      <mat-label>Select Tag</mat-label>
+      <mat-select (selectionChange)="filterResults($event.value)">
+        <mat-option *ngFor="let tag of allTags" [value]="tag">{{ tag }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="tags">
+    <mat-checkbox *ngFor="let tag of allTags" (change)="toggleTag(tag)" class="checkbox-black">
+      {{ tag }}
+    </mat-checkbox>
+  </div>
+  <div class="clear-button">
+    <button mat-raised-button color="darkgrey" (click)="clearFilters()">Clear Filters</button>
+  </div>
 </section>
 
 <section class="results">

@@ -7,11 +7,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list'
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
   imports: [
+    HttpClientModule,
     RouterLink,
     CommonModule,
     NgForOf,

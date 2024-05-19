@@ -1,0 +1,23 @@
+[
+  {
+    "title": "First Post",
+    "summary": "This is the first post",
+    "tags": ["tag1", "tag2"],
+    "content": "Content of the first post",
+    "id": "550e8400-e29b-41d4-a716-446655440000"
+  },
+  {
+    "title": "Second Post",
+    "summary": "This is the second post",
+    "tags": ["tag3", "tag4"],
+    "content": "Content of the second post",
+    "id": "550e8400-e29b-41d4-a716-446655440001"
+  },
+  {
+    "title": "Third Post",
+    "summary": "This is the third post",
+    "tags": ["tag5", "tag6"],
+    "content": "Content of the third post",
+    "id": "550e8400-e29b-41d4-a716-446655440002"
+  }
+]

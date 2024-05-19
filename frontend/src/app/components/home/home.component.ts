@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import {HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { PostListComponent } from "../post-list/post-list.component";
 import { PostService } from "../../services/post.service";
@@ -17,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   standalone: true,
   imports: [
     CommonModule,
+    HttpClientModule,
     PostListComponent,
     MatFormFieldModule,
     MatCardModule,
@@ -25,21 +27,24 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatGridListModule,
     MatSelectModule,
     FormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   posts: Post[] = [];
-  postService: PostService = inject(PostService);
   filteredPosts: Post[] = [];
   selectedTags: string[] = [];
   selectedDropdownTag: string = '';
 
-  constructor() {
-    this.posts = this.postService.getAllPosts();
-    this.filteredPosts = this.posts;
+  postService: PostService = inject(PostService);
+
+  ngOnInit(): void {
+    this.postService.getAllPosts().subscribe((data: Post[]) => {
+      this.posts = data;
+      this.filteredPosts = this.posts;
+    });
   }
 
   get allTags(): string[] {
@@ -56,6 +61,12 @@ export class HomeComponent {
         allSelectedTags.every(tag => post.tags.includes(tag))
       );
     }
+  }
+
+   clearFilters() {
+     this.selectedTags = [];
+     this.selectedDropdownTag = '';
+     this.applyFilters();
   }
 
   toggleTag(tag: string) {

@@ -1,12 +1,12 @@
-<section class="listing" *ngIf="posts">
+<section class="listing" *ngIf="post">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{ posts?.title }}</mat-card-title>
+      <mat-card-title>{{ post?.title }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>{{posts?.content}}</p>
+      <p>{{post?.content}}</p>
       <div class="tags">
-          <mat-chip *ngFor="let tag of posts?.tags">{{ tag }}</mat-chip>
+          <mat-chip *ngFor="let tag of post?.tags">{{ tag }}</mat-chip>
       </div>
     </mat-card-content>
     <mat-card-actions>
