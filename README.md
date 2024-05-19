@@ -1,8 +1,5 @@
 # News Letter
 
-This file contains information about the service and instructions for starting this service
-
-## Why do you need this service?
 With the help of this service, you can view a list of posts, each post is clickable, you can click on the "Learn more" button and see detailed information about the post
 
 ## Installation
