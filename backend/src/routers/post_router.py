@@ -1,13 +1,17 @@
+import os
+
 from fastapi import APIRouter, HTTPException, Query
 from typing import List
 from uuid import UUID
-from backend.src.schemas.post import Post as PostSchema
+from schemas.post import Post as PostSchema
 import json
 from functools import lru_cache
 
 router = APIRouter(prefix='/posts')
 
-with open('db.json', 'r') as f:
+db_path = os.path.join(os.path.dirname(__file__), '..', 'db.json')
+
+with open(db_path, 'r') as f:
     posts_data = json.load(f)
 
 
