@@ -32,17 +32,34 @@ If after running this command, you were shown the docker version, then go to the
 3. Start containers using Docker Compose:
 
     ```bash
-    docker-compose up -d
+    cd backend
+    docker-compose up -d --build
     ```
 
 _The `-d` option runs containers in the background._
 
-4. After successful launch, you can access your project at `http://localhost:4200` in your web browser.
+4. After successful launch of the backend, return to the project directory:
+    
+   ```bash
+    cd ..
+   
+    ```
+5. Start containers for the frontend using Docker Compose:
+    ```bash
+    cd frontend
+    docker-compose up -d --build
+    cd ..
+    ```
+
+
+6. After successful launch, you can access your project at `http://localhost:4200` in your web browser.
 
 ### Stopping the project
 
 To stop the project, run the following command:
 
-```bash
-docker-compose down
-```
+   ```bash
+    docker stop $(docker ps -q)
+    docker rm $(docker ps -a -q)
+    docker rmi $(docker images -q)
+   ```
